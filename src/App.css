@@ -1,0 +1,86 @@
+a {
+  font-family: monospace;
+  color: #000;
+  /* padding: 2% 5% 1% 5%; */
+  /* text-align: left; */
+  font-size: 1.5em;
+}
+
+/* a:hover {
+  background: #f5f3c4;
+} */
+
+.clock {
+	font-size: 5em;
+  margin-bottom: 1%;
+  margin-top: 5%;
+}
+
+p {
+	margin-bottom: 1%;
+	margin-top: 1%;
+}
+
+.ampm {
+	opacity: .75;
+}
+
+.date-str {
+	font-size: 2em;
+	opacity: .75;
+}
+
+.greeting {
+	font-size: 2em;
+	opacity: .5;
+}
+
+.td {
+  padding: 1% 1%;
+  width: auto;
+}
+
+.td:hover {
+  cursor: pointer;
+  background: #f5f3c4;
+  transition: 0.2s background ease;
+}
+
+.td-done {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+.td-todo {
+  text-decoration: none;
+}
+
+input {
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-color: rgba(0,0,0,.5);
+  font-size: 1em;
+  margin-bottom: 2%;
+  width: 40%;
+}
+
+.clear-todos {
+  cursor: pointer;
+  font-family: monospace;
+  text-decoration: underline;
+}
+
+.ico {
+  padding: 2% 2%;
+  filter: opacity(0.75);
+  /* transition: .5s all ease;
+  -webkit-backface-visibility: hidden;
+  background-clip: text;
+  -webkit-transform: translate3d(0, 0, 0); */
+}
+
+.icons {
+  margin: 5% 5%;
+}
