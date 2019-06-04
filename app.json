@@ -1,0 +1,8 @@
+{
+    "name": "Startpage todolist",
+    "description": "Startpage featuring a todolist",
+    "repository": "https://github.com/jastronaut/startpage-todolist",
+    "logo": "https://cdn.rawgit.com/heroku/node-js-getting-started/master/public/node.svg",
+    "keywords": ["node", "reactjs", "heroku"],
+    "image": "heroku/nodejs"
+  }
