@@ -152,9 +152,17 @@ class StartPage extends React.Component {
 	}
 
 	handleSearch(event) {
-		const search = this.state.search;
-		// i use bing for microsoft rewards points :~)
-		window.location.replace("https://www.bing.com/search?q=" + encodeURIComponent(search) + "&adlt=strict");
+		const search = this.state.search.trim();
+		// look for "valid" url and direct to it if entered, otherwise search for query
+
+		// valid url needs: http/s protocol, .com/net/org/edu, no whitespace
+		var websiteQuery = RegExp(/http(s{0,1}):\/\/(\S)+\.(com|net|org|edu)\S{0,}$/);
+		if (websiteQuery.test(search)) {
+			window.location.replace(search);
+		} else {
+			// i use bing for microsoft rewards points :~)
+			window.location.replace("https://www.bing.com/search?q=" + encodeURIComponent(search) + "&adlt=strict");
+		}
 		event.preventDefault();
 	}
 
