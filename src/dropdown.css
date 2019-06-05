@@ -1,0 +1,28 @@
+.dd-content {
+    /* display: none; */
+    position: absolute;
+    z-index: 1;
+    display: block;
+    /* padding: 1% 1%; */
+    width: 100%;
+    background-color: #f2f1c2;
+}
+
+.dd-content p:hover {
+    background-color: #fff;
+}
+
+.dd-content p {
+    padding: 2% 2%;
+    margin: 0% 0%;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    width: 40%;
+}
+
+.search {
+    width: 100%;
+}
