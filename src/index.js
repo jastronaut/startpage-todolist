@@ -2,8 +2,10 @@ import React from 'react';
 import './App.css';
 import ReactDOM from 'react-dom';
 import './index.css';
+import './dropdown.css';
 import * as serviceWorker from './serviceWorker';
 import { BookOpen, Code, Youtube, Cpu, Book } from 'react-feather';
+import request from 'request';
 
 // function Tabs() {
 // 	return (
@@ -58,6 +60,26 @@ function TimeArea() {
 	);
 }
 
+function Suggestion(props) {
+	return (
+		<p onClick={props.onClick}>{props.value}</p>
+	);
+}
+
+
+class Dropdown extends React.Component {
+	render() {
+		// render list of dropdown items thru props
+		const suggestions = this.props.suggestions.map((val, index) => (<Suggestion key={val} value={val} onClick={() => this.props.onClick(val)} />));
+
+		return (
+				<div className='dd-content'>
+				{suggestions}
+				</div>
+		);
+	}
+}
+
 class StartPage extends React.Component {
 	constructor(props) {
 		super(props);
@@ -69,12 +91,15 @@ class StartPage extends React.Component {
 		this.handleClearAll = this.handleClearAll.bind(this);
 		this.handleSearch = this.handleSearch.bind(this);
 		this.handleSearchInput = this.handleSearchInput.bind(this);
+		this.onClickSuggestion = this.onClickSuggestion.bind(this);
+		this.handleKeyPress = this.handleKeyPress.bind(this);
 	}
 
 	loadState() {
 		let st = {
 			newTodo: '',
 			search: '',
+			suggestions: []
 		};
 		if (this.storage.getItem('todosDone')) {
 			st.todosDone = this.storage.getItem('todosDone').split(',');
@@ -149,6 +174,30 @@ class StartPage extends React.Component {
 		this.setState({
 			search: event.target.value
 		});
+
+		if (this.state.search === '') {
+			this.setState({suggestions: []});
+			return;
+		}
+
+		// http://api.bing.com/osjson.aspx?query=
+
+		request('http://api.bing.com/osjson.aspx?query=' + encodeURIComponent(event.target.value), {json: true}, (err, res, body) => {
+			if (err) {
+				return;
+			}
+			this.setState({suggestions: body[1].slice(0, 5)});
+		});
+
+	}
+
+	searchRedirect(search) {
+		// i use bing for microsoft rewards points :~)
+		window.location.replace("https://www.bing.com/search?q=" + encodeURIComponent(search) + "&adlt=strict");
+	}
+
+	onClickSuggestion(i) {
+		this.searchRedirect(i);
 	}
 
 	handleSearch(event) {
@@ -160,10 +209,17 @@ class StartPage extends React.Component {
 		if (websiteQuery.test(search)) {
 			window.location.replace(search);
 		} else {
-			// i use bing for microsoft rewards points :~)
-			window.location.replace("https://www.bing.com/search?q=" + encodeURIComponent(search) + "&adlt=strict");
+			this.searchRedirect(search);
+			
 		}
 		event.preventDefault();
+	}
+
+	handleKeyPress(event) {
+		// clear search bar when escape is pressed
+		if (event.keyCode === 27) {
+			this.setState({search: '', suggestions: []});
+		}
 	}
 
 	render() {
@@ -171,12 +227,20 @@ class StartPage extends React.Component {
 			<section>
 				<TimeArea />
 				
+				{/* search bar area */}
 				<form onSubmit={this.handleSearch}>
-					<input autoFocus type='text' placeholder='search' value={this.state.search} onChange={this.handleSearchInput} />
+					<div className='dropdown'>
+					<input autoCorrect="off" className='search' autoFocus type='text' placeholder='search' value={this.state.search} onChange={this.handleSearchInput} onKeyDown={(event) => this.handleKeyPress(event)} />
+					<Dropdown suggestions={this.state.suggestions} onClick={i => this.onClickSuggestion(i)} />
+					</div>
 				</form>
+				
+				{/* todolist input area */}
 				<form onSubmit={this.handleSubmit}>
-					<input type='text' placeholder='todo' value={this.state.newTodo} onChange={this.handleInputChange} />
+					<input autoCorrect="off" type='text' placeholder='todo' value={this.state.newTodo} onChange={this.handleInputChange} />
 				</form>
+
+				{/* actual todolist */}
 				<TodoArea todoTodos={this.state.todoTodos} todosDone={this.state.todosDone} onClick={i => this.handleClick(i)} />
 				<div className='clear-todos' onClick={this.handleClearDone}>clear done</div>
 				<div className='clear-todos' onClick={this.handleClearAll}>clear all</div>
