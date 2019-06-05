@@ -4,12 +4,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "bulma": "^0.7.5",
     "react": "^16.8.6",
     "react-anime": "^2.2.0",
     "react-dom": "^16.8.6",
     "react-feather": "^1.1.6",
-    "react-scripts": "3.0.1"
+    "react-scripts": "3.0.1",
+    "request": "^2.88.0"
   },
   "scripts": {
     "start": "react-scripts start",
