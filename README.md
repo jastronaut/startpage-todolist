@@ -4,9 +4,11 @@
 
 i created this app to learn about react and to become more familiar with javascript.
 
-![screenshot 1](preview/preview.png)
+![startpage preview](preview/preview.png)
 
-![screenshot 1](preview/preview-todo.png)
+![startpage todolist](preview/preview-todo.png)
+
+![startpage search suggestions](preview/preview-search.png)
 
 ## features
 
@@ -25,6 +27,8 @@ i created this app to learn about react and to become more familiar with javascr
 ### search
 - searchbar connects to bing
 - page automatically focuses on search bar for quick searching whenever page is opened
+- displays dropdown with autosuggested results, using the bing search api
+    - selecting a suggestion redirects to a bing search for that suggestion
 
 ### icon shortcuts
 - shortcuts to frequently visited websites
