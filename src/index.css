@@ -4,7 +4,8 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #FCFBE3;
+  background: #E3C3C3;
+  /* background: #FCFBE3; */
 }
 
 main {
