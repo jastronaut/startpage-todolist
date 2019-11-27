@@ -4,132 +4,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import './dropdown.css';
 import * as serviceWorker from './serviceWorker';
-import { BookOpen, Code, Book } from 'react-feather';
+
 import { REDDIT_USERNAME } from './secret.js';
 
-function Icon() {
-	return (
-		<div className='icons'>
-			<a
-				className='ico'
-				href='https://developer.mozilla.org/en-US/docs/Web/CSS/Reference#Keyword_index'
-				alt='css reference'
-			>
-				<Code />
-			</a>
-			<a
-				className='ico'
-				href='https://news.ycombinator.com'
-				alt='hacker news'
-			>
-				<BookOpen />
-			</a>
-			<a className='ico' href='http://piazza.com/' alt='piazza'>
-				<Book />
-			</a>
-		</div>
-	);
-}
-
-function Todo(props) {
-	return (
-		<div className={props.cname} onClick={props.onClick}>
-			{props.value}
-		</div>
-	);
-}
-
-class TodoArea extends React.Component {
-	render() {
-		const todoList = this.props.todoTodos.map((val, index) => (
-			<Todo
-				cname='td td-todo'
-				key={val}
-				value={val}
-				onClick={() => this.props.onClick(val)}
-			/>
-		));
-		const doneList = this.props.todosDone.map((val, index) => (
-			<Todo
-				cname='td td-done'
-				key={val}
-				value={val}
-				onClick={() => this.props.onClick(val)}
-			/>
-		));
-		return (
-			<section className='todos'>
-				{todoList}
-				{doneList}
-			</section>
-		);
-	}
-}
-
-class TimeArea extends React.Component {
-	constructor(props) {
-		super(props);
-		const { hours, minutes, amPM, greeting } = this.cr8D8();
-		this.state = {
-			hours: hours,
-			minutes: minutes,
-			amPM: amPM,
-			greeting: greeting,
-		};
-
-		const d = new Date();
-		this.dateStr = d.toDateString();
-
-		this.upd8();
-	}
-
-	cr8D8() {
-		const d = new Date();
-		const baseHours = d.getHours();
-		const mins =
-			d.getMinutes() < 10 ? '0' + d.getMinutes() : d.getMinutes();
-		const hours = baseHours === 12 ? 12 : baseHours % 12;
-		const amPM = baseHours >= 12 ? 'PM' : 'AM';
-		const greeting =
-			baseHours >= 12
-				? baseHours > 16
-					? 'Good evening.'
-					: 'Good afternoon'
-				: 'Good morning.';
-		return {
-			hours: hours,
-			minutes: mins,
-			amPM: amPM,
-			greeting: greeting,
-		};
-	}
-
-	upd8() {
-		setInterval(() => {
-			const { hours, minutes, amPM, greeting } = this.cr8D8();
-
-			this.setState({
-				minutes: minutes,
-				hours: hours,
-				amPM: amPM,
-				greeting: greeting,
-			});
-		}, 6000);
-	}
-
-	render() {
-		return (
-			<section>
-				<h1 className='clock'>
-					{this.state.hours}:{this.state.minutes}{' '}
-					<span className='ampm'>{this.state.amPM}</span>
-				</h1>
-				<p className='date-str'>{this.dateStr}</p>
-				<p className='greeting'>{this.state.greeting}</p>
-			</section>
-		);
-	}
-}
+import TodoArea from './components/Todos';
+import Icons from './components/Icons';
+import Time from './components/Time';
 
 function Suggestion(props) {
 	return <p onClick={props.onClick}>{props.value}</p>;
@@ -287,24 +167,21 @@ class StartPage extends React.Component {
 	}
 
 	handleSearch(event) {
-		const search = this.state.search.trim();
+		const query = this.state.search.trim();
+		event.preventDefault();
 
-		switch (search) {
+		switch (query) {
 			case 'mess':
 				window.location.replace('https://www.messenger.com/');
-				event.preventDefault();
 				return;
 			case 'redd':
 				window.location.replace('https://www.reddit.com/');
-				event.preventDefault();
 				return;
 			case 'paper':
 				window.location.replace('https://paper.dropbox.com/');
-				event.preventDefault();
 				return;
 			case 'news':
 				window.location.replace('https://news.ycombinator.com/news');
-				event.preventDefault();
 				return;
 			case 'yt':
 				window.location.replace(
@@ -324,23 +201,33 @@ class StartPage extends React.Component {
 				window.location.replace(
 					'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference#Keyword_index'
 				);
-				event.preventDefault();
+				return;
+			case 'canvas':
+				window.location.replace('https://canvas.eee.uci.edu/');
+				return;
+			case 'mail':
+				window.location.replace('https://mail.protonmail.com/login');
 				return;
 			default:
 				break;
 		}
+
+		// subreddit lookup
+		const redditRE = /^r\/[a-zA-Z0-9]+$/;
+		if (redditRE.exec(query)) {
+			window.location.replace('https://www.reddit.com/' + query);
+			return;
+		}
+
 		// look for "valid" url and direct to it if entered, otherwise search for query
 
 		// valid url needs: http/s protocol, .com/net/org/edu, no whitespace
-		var websiteQuery = RegExp(
-			/http(s{0,1}):\/\/(\S)+\.(com|net|org|edu)\S{0,}$/
-		);
-		if (websiteQuery.test(search)) {
-			window.location.replace(search);
+		const websiteRE = /http(s{0,1}):\/\/(\S)+\.(com|net|org|edu)\S{0,}$/;
+		if (websiteRE.exec(query)) {
+			window.location.replace(query);
 		} else {
-			this.searchRedirect(search);
+			this.searchRedirect(query);
 		}
-		event.preventDefault();
 	}
 
 	handleKeyPress(event) {
@@ -352,8 +239,8 @@ class StartPage extends React.Component {
 
 	render() {
 		return (
-			<section>
-				<TimeArea />
+			<section className='app'>
+				<Time />
 
 				{/* search bar area */}
 				<form onSubmit={this.handleSearch}>
@@ -386,24 +273,19 @@ class StartPage extends React.Component {
 					/>
 				</form>
 
-				{/* actual todolist */}
 				<TodoArea
 					todoTodos={this.state.todoTodos}
 					todosDone={this.state.todosDone}
+					clearTodos={this.handleClearAll}
+					clearFinishedTodos={this.handleClearDone}
 					onClick={i => this.handleClick(i)}
 				/>
-				<div className='clear-todos' onClick={this.handleClearDone}>
-					clear done
-				</div>
-				<div className='clear-todos' onClick={this.handleClearAll}>
-					clear all
-				</div>
-				<Icon />
+				<Icons />
 			</section>
 		);
 	}
 }
 
-ReactDOM.render(<StartPage />, document.getElementById('time'));
+ReactDOM.render(<StartPage />, document.querySelector('main'));
 
 serviceWorker.unregister();

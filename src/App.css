@@ -1,24 +1,27 @@
+main {
+	margin: 0 10%;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
 a {
 	font-family: monospace;
 	color: #000;
-	/* padding: 2% 5% 1% 5%; */
-	/* text-align: left; */
 	font-size: 1.5em;
 }
 
-/* a:hover {
-  background: #f5f3c4;
-} */
-
 .clock {
 	font-size: 5em;
-	margin-bottom: 1%;
-	margin-top: 5%;
 }
 
-p {
-	margin-bottom: 1%;
-	margin-top: 1%;
+.time-area > * {
+	margin: 0;
+}
+
+.time-area {
+	margin-bottom: 1rem;
 }
 
 .ampm {
@@ -38,12 +41,13 @@ p {
 .td {
 	padding: 1% 1%;
 	width: auto;
+	transition: 0.2s background ease;
 }
 
 .td:hover {
 	cursor: pointer;
-	background: #f5f3c4;
-	transition: 0.2s background ease;
+	background: #393131;
+	color: #e3c3c3;
 }
 
 .td-done {
@@ -53,6 +57,10 @@ p {
 
 .td-todo {
 	text-decoration: none;
+}
+
+.todo-controls {
+	margin: 0.5rem 0 1rem;
 }
 
 input {

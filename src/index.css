@@ -1,13 +1,9 @@
 body {
-  text-align: center;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background: #E3C3C3;
-  /* background: #FCFBE3; */
-}
-
-main {
-	margin: 10% 20%;
+	text-align: center;
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	background: #e3c3c3;
+	/* background: #FCFBE3; */
 }
