@@ -166,10 +166,8 @@ class StartPage extends React.Component {
 		this.searchRedirect(i);
 	}
 
-	handleSearch(event) {
-		const query = this.state.search.trim();
+	redirectToShortcuts(query, event) {
 		event.preventDefault();
-
 		switch (query) {
 			case 'mess':
 				window.location.replace('https://www.messenger.com/');
@@ -187,7 +185,6 @@ class StartPage extends React.Component {
 				window.location.replace(
 					'https://invidio.us/feed/subscriptions'
 				);
-				event.preventDefault();
 				return;
 			case 'feed':
 				window.location.replace(
@@ -195,7 +192,6 @@ class StartPage extends React.Component {
 						REDDIT_USERNAME +
 						'/m/lyfe/'
 				);
-				event.preventDefault();
 				return;
 			case 'css':
 				window.location.replace(
@@ -216,6 +212,18 @@ class StartPage extends React.Component {
 		const redditRE = /^r\/[a-zA-Z0-9]+$/;
 		if (redditRE.exec(query)) {
 			window.location.replace('https://www.reddit.com/' + query);
+			return;
+		}
+	}
+
+	handleSearch(event) {
+		const query = this.state.search.trim();
+		event.preventDefault();
+
+		if (query.length < 1) return;
+
+		if (query.charAt(0) === ':') {
+			this.redirectToShortcuts(query.substr(1, query.length - 1), event);
 			return;
 		}
 
