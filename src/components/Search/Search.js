@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-import '../dropdown.css';
-import { REDDIT_USERNAME } from '../secrets.js';
+import './dropdown.css';
+import { REDDIT_USERNAME } from '../../secrets.js';
 
 function Suggestion(props) {
 	return <p onClick={props.onClick}>{props.value}</p>;

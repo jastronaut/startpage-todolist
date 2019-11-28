@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './style.css';
 
 const Todo = ({ text, done, onClick }) => (
 	<div className={`td ${done ? 'td-done' : 'td-todo'}`} onClick={onClick}>

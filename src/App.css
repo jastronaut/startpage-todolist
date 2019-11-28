@@ -12,57 +12,6 @@ a {
 	font-size: 1.5em;
 }
 
-.clock {
-	font-size: 5em;
-}
-
-.time-area > * {
-	margin: 0;
-}
-
-.time-area {
-	margin-bottom: 1rem;
-}
-
-.ampm {
-	opacity: 0.75;
-}
-
-.date-str {
-	font-size: 2em;
-	opacity: 0.75;
-}
-
-.greeting {
-	font-size: 2em;
-	opacity: 0.5;
-}
-
-.td {
-	padding: 1% 1%;
-	width: auto;
-	transition: 0.2s background ease;
-}
-
-.td:hover {
-	cursor: pointer;
-	background: #393131;
-	color: #e3c3c3;
-}
-
-.td-done {
-	text-decoration: line-through;
-	opacity: 0.5;
-}
-
-.td-todo {
-	text-decoration: none;
-}
-
-.todo-controls {
-	margin: 0.5rem 0 1rem;
-}
-
 input {
 	background: none;
 	border-top: none;
@@ -78,12 +27,6 @@ input {
 	input {
 		width: 80%;
 	}
-}
-
-.clear-todos {
-	cursor: pointer;
-	font-family: monospace;
-	text-decoration: underline;
 }
 
 .ico {

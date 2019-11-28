@@ -1,0 +1,25 @@
+.clock {
+	font-size: 5em;
+}
+
+.time-area > * {
+	margin: 0;
+}
+
+.time-area {
+	margin-bottom: 1rem;
+}
+
+.ampm {
+	opacity: 0.75;
+}
+
+.date-str {
+	font-size: 2em;
+	opacity: 0.75;
+}
+
+.greeting {
+	font-size: 2em;
+	opacity: 0.5;
+}

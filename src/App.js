@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import './index.css';
 
-import TodoArea from './components/Todos';
+import Todos from './components/Todos';
 import Icons from './components/Icons';
 import Time from './components/Time';
 import Search from './components/Search';
@@ -13,7 +13,7 @@ class StartPage extends React.Component {
 			<section className='app'>
 				<Time />
 				<Search />
-				<TodoArea />
+				<Todos />
 				<Icons />
 			</section>
 		);

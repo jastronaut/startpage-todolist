@@ -1,0 +1,46 @@
+.todos {
+	margin: 0 30%;
+}
+@media screen and (max-width: 850px) {
+	.todos {
+		margin: 0 10%;
+	}
+}
+
+.td {
+	width: auto;
+	transition: 0.2s background ease;
+}
+
+.td:first-of-type {
+	margin-top: 1rem;
+}
+
+.td:last-of-type {
+	margin-bottom: 1rem;
+}
+
+.td:hover {
+	cursor: pointer;
+	background: #393131;
+	color: #e3c3c3;
+}
+
+.td-done {
+	text-decoration: line-through;
+	opacity: 0.5;
+}
+
+.td-todo {
+	text-decoration: none;
+}
+
+.todo-controls {
+	margin-bottom: 2rem;
+}
+
+.clear-todos {
+	cursor: pointer;
+	font-family: monospace;
+	text-decoration: underline;
+}
