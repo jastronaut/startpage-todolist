@@ -31,17 +31,17 @@ i created this app to learn about react and to become more familiar with javascr
 -   searchbar connects to duckduckgo
 -   page automatically focuses on search bar for quick searching whenever page is opened
 -   displays dropdown with autosuggested results, using the bing search api
-    -   selecting a suggestion redirects to a bing search for that suggestion
+
+#### search shortcuts
+
+-   type `:` into the searchbar followed by a shortcut defined in `src/components/Search.js` to be redirected to websites i find useful :)
 
 ### icon shortcuts
 
 -   shortcuts to frequently visited websites
--   uses [feather icons](https://github.com/feathericons/react-feather)
--   **TODO**
-    -   animate hover
 
-## usage
+## credits
 
--   run `npm run-script build`
--   move `build/` items into desired directory
--   set that directory as your new tab page or homepage!
+favicon generated with [favicon.io](https://favicon.io/)
+
+shortcut icons from [feather icons](https://github.com/feathericons/react-feather)
